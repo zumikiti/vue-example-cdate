@@ -1,7 +1,27 @@
 <script setup lang="ts">
+import { cdate } from "cdate"
+
 defineProps<{
   msg: string;
 }>();
+
+const now = cdate()
+console.log(now.format("YYYY-MM-DD HH:mm:ss"))
+
+const today = cdate("2023-01-01");
+console.log(today.format("   MMMM YYYY"));
+
+const start = today.startOf("month").startOf("week");
+const end = today.endOf("month").endOf("week");
+
+for (let day = start; +day < +end;) {
+    const week = [];
+    for (let i = 0; i < 7; i++) {
+        week.push(day.format("DD"))
+        day = day.next("day");
+    }
+    console.log(week.join(" "));
+}
 </script>
 
 <template>
